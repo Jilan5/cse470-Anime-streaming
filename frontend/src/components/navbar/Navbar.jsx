@@ -29,6 +29,9 @@ const Navbar = () => {
         <li>
           <Link to="/chat">Chat</Link>
         </li>
+        <li>
+          <Link to="/store">Store</Link>
+        </li>
         <li><a>Settings</a></li>
         <li><LogoutButton /></li>
       </ul>

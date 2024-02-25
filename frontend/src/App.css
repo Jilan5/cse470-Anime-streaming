@@ -1,0 +1,21 @@
+/* FILEPATH: /c:/Users/pc/Desktop/cse470-Anime-streaming/frontend/src/App.css */
+
+/* Default background style */
+body {
+  background-color: #f0f0f0;
+}
+
+/* Background style for home page */
+body.home {
+  background-color: #ffffff;
+}
+
+/* Background style for about page */
+body.about {
+  background-color: #eaeaea;
+}
+
+/* Background style for contact page */
+body.contact {
+  background-color: #f5f5f5;
+}
