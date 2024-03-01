@@ -5,7 +5,28 @@ import { useCart } from '../../context/cartContext';
 
 
 function AllProducts() {
-  
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // Fetch products data from backend API
+    const getProducts = async () => {
+        try {
+            const response = await fetch('/store/products');
+            const data = await response.json()
+            console.log('data: ', data);
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            setProducts(data);
+        } catch (error) {
+            console.error('Error fetching products: ', error);
+        }
+    };
+
+    getProducts();
+
+   
+  }, []);
 
   const [cart, setCart] = useCart();
 
@@ -30,6 +51,18 @@ function AllProducts() {
 
   };
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredData, setFilteredData] = useState(products);
+
+  const handleSearch = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    const filtered = products.filter(product =>
+      product.name.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredData(filtered);
+  }
+
   
 
 
@@ -51,7 +84,13 @@ function AllProducts() {
         
         </div>
       
-
+        <div className="flex flex-wrap -mx-4">
+        {searchTerm === '' ? products.map(product => (
+          <Product key={product._id} product={product} onAddToCart={handleAddToCart}/>
+        )): filteredData.map((product) => (
+          <Product key={product._id} product={product} onAddToCart={handleAddToCart}/>
+        ))}
+      </div>
       
     </div>
     
