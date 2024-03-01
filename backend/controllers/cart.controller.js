@@ -98,7 +98,7 @@ export const clearCart = async (req, res) => {
             return res.status(404).json({ message: 'Cart not found' });
         }
 
-        // Clear all items from the cart
+    
         cart.items = [];
         
         await cart.save();

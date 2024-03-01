@@ -14,13 +14,13 @@ const Cart = ({ cart, onUpdateQuantity, onRemoveFromCart }) => {
   return (
 
     <div className="text-black">
-      <h2>Shopping Cart</h2>
+ 
         {cart.length === 0 ? <p>Your cart is empty</p>: <p>You have {cart.length} items in your cart</p>}
     <div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto ">
         <table className="table">
         {/* head */}
-        <thead className='text-black'>
+        <thead className='text-black text-xl'>
         <tr>
             <th>Name</th>
             <th>Price</th>
@@ -41,7 +41,7 @@ const Cart = ({ cart, onUpdateQuantity, onRemoveFromCart }) => {
                 </div>
                 <div>
                 <div className="font-bold">{item.name}</div>
-                <div className="text-sm opacity-50">United States</div>
+  
                 </div>
             </div>
             </td>
@@ -49,7 +49,8 @@ const Cart = ({ cart, onUpdateQuantity, onRemoveFromCart }) => {
                 <p>Price: ${item.price}</p>
             </td>
             <td>
-            <input 
+            <input
+                className='border border-lime-400 px-2 py-2 rounded-md w-1/4 text-white'
                 type="number"
                 min="1"
                 value={item.quantity}
@@ -57,7 +58,7 @@ const Cart = ({ cart, onUpdateQuantity, onRemoveFromCart }) => {
             />
             </td>
             <th>
-            <button onClick={() => handleRemoveFromCart(item._id)}>Remove</button>
+            <button className='btn hover:bg-red-600 hover:text-black border border-lime-400' onClick={() => handleRemoveFromCart(item._id)}>Remove</button>
             </th>
         </tr>
         ))}
