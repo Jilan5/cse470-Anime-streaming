@@ -23,7 +23,7 @@ const Cart = ({ cart, onUpdateQuantity, onRemoveFromCart }) => {
         <thead className='text-black text-xl'>
         <tr>
             <th>Name</th>
-            <th>Price</th>
+            <th>Price-individual</th>
             <th>Quantity</th>
             <th></th>
         </tr>
