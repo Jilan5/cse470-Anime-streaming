@@ -60,6 +60,7 @@ export const updateCartItem = async (req, res) => {
         }
 
         // Update the quantity of the cart item
+        // If the quantity is 0, remove the item from the cart
         cartItem.quantity = quantity;
         
         await cart.save();
