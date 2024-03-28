@@ -10,7 +10,7 @@ import Navbar from "./components/navbar/Navbar";
 import Chat from "./pages/chat/Chat";
 import Store from "./pages/store/Store";
 import CartPage from "./pages/cart/cartPage";
-
+import AnimeDetails from "./components/anime/AnimeDetails";
 
 function App() {
 	const { authUser } = useAuthContext();
@@ -22,11 +22,13 @@ function App() {
 			
 			<Routes>
 				<Route path='/' element={authUser ? <Home /> : <Navigate to={"/login"} />} />
+				<Route path='/anime/:id' element={authUser ? <AnimeDetails /> : <Navigate to={"/login"} />} />
 				<Route path='/chat' element={authUser ? <Chat /> : <Navigate to={"/login"} />} />
 				<Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
 				<Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
 				<Route path='/store' element={authUser ? <Store /> : <Navigate to={"/login"} />} />
 				<Route path='/store/cart' element={authUser ? <CartPage />: <Navigate to={"/login"} />} />
+				
 			</Routes>
 			<Toaster />
 		</div>

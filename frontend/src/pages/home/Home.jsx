@@ -1,8 +1,13 @@
+import React from 'react';
+import AnimeList from './AnimeList';
 
 const Home = () => {
   return (
 	<div>
-		<h1 className="btn btn-ghost text-4xl font-mono text-red-500">Welcome to Vinalnd</h1>
+		<div className=" p-4 h-screen flex flex-wrap ">
+    
+	    	<AnimeList />
+		</div>
 	</div>
   )
 }
