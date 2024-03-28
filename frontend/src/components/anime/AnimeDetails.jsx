@@ -28,9 +28,17 @@ const AnimeDetails = () => {
 }, []);
 
   return (
-    <div>
+    <div className='w-full h-full'>
         <h1>Anime detaits {id}</h1>
-        <h2>{anime.name}</h2>
+        <div className="flex w-full">
+  <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">Review and Description</div>
+
+
+  <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">Episodes</div>
+
+
+  <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">Comments</div>
+        </div>
     </div>
   )
 }
