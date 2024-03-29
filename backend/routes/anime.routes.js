@@ -11,6 +11,10 @@ router.get('/:id', animeController.getAnimeById);
 router.put('/:id', animeController.updateAnime);
 router.delete('/:id', animeController.deleteAnime);
 
+// Routes for favorite anime
+router.post('/favorite/add', animeController.addToFavorites);
+router.post('/favorite/remove', animeController.removeFromFavorites);
+
 
 
 export default router;

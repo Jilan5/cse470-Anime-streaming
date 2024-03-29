@@ -11,6 +11,7 @@ import Chat from "./pages/chat/Chat";
 import Store from "./pages/store/Store";
 import CartPage from "./pages/cart/cartPage";
 import AnimeDetails from "./components/anime/AnimeDetails";
+import FavoritesPage from "./pages/favorites/FavoritesPage"; 
 
 function App() {
 	const { authUser } = useAuthContext();
@@ -28,6 +29,8 @@ function App() {
 				<Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
 				<Route path='/store' element={authUser ? <Store /> : <Navigate to={"/login"} />} />
 				<Route path='/store/cart' element={authUser ? <CartPage />: <Navigate to={"/login"} />} />
+				<Route path='/favorites' element={authUser ? <FavoritesPage /> : <Navigate to={"/login"} />} />
+			
 				
 			</Routes>
 			<Toaster />
