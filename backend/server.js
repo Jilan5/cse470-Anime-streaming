@@ -10,6 +10,8 @@ import storeRoutes from "./routes/store.routes.js";
 import animeRoutes from "./routes/anime.routes.js";
 import anime_genreRoutes from "./routes/anime_genre.routes.js";
 
+import eventRoutes from "./routes/event.routes.js";
+
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
 
@@ -28,6 +30,8 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 app.use("/store", storeRoutes);
 app.use("/genre", anime_genreRoutes);
+
+app.use("/event", eventRoutes);
 
 
 

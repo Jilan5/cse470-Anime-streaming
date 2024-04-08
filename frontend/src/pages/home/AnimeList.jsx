@@ -33,8 +33,8 @@ function allAnime() {
     const getGenres = async () => {
       try {
         
-        const response = await fetch('/genre');
-        console.log(response)
+        const response = await fetch('http://localhost:5000/genre');
+        //console.log(response)
         
 
         const data = await response.json()
@@ -73,7 +73,7 @@ function allAnime() {
     const genre = event.target.value;
     setGenreTerm(genre);
     const filtered = animes.filter(anime => 
-      anime.genres.toLowerCase().includes(genre.toLowerCase())
+      anime.genres.includes(genre)
     );
     setFilteredGenreData(filtered);
   }
@@ -98,7 +98,7 @@ function allAnime() {
           <select id="mySelect" name="mySelect" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" onChange={handleGenre}>
             <option value="">Select Genre</option>
             {genres.map(genre=>(
-              <option key={genre._id} value={genre.name}>{genre.name}</option>
+              <option key={genre._id} value={genre._id}>{genre.name}</option>
             ))}
           </select>
         </div>

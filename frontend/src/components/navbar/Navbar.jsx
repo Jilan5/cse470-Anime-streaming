@@ -18,6 +18,9 @@ const Navbar = () => {
   </div> 
   <div className="flex-none gap-2">
   <div>
+    <button className="btn btn-ghost text-xl font-mono"><Link to="/events">Events</Link></button>
+  </div>
+  <div>
     <button className="btn btn-ghost text-xl font-mono" onClick={handleFavoriteClick}><Link to="/favorites">Favorites</Link></button>
   </div>
   <div>

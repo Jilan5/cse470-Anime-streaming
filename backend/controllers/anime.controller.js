@@ -4,6 +4,7 @@ import Anime from '../models/anime.model.js';
 const getAllAnime = async (req, res) => {
     try {
         const animeList = await Anime.find();
+      
         res.json(animeList);
     } catch (err) {
         res.status(500).json({ message: err.message });

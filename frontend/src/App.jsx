@@ -12,6 +12,9 @@ import Store from "./pages/store/Store";
 import CartPage from "./pages/cart/cartPage";
 import AnimeDetails from "./components/anime/AnimeDetails";
 import FavoritesPage from "./pages/favorites/FavoritesPage"; 
+import AllEvent from "./pages/event/EventList";
+
+
 
 function App() {
 	const { authUser } = useAuthContext();
@@ -30,6 +33,8 @@ function App() {
 				<Route path='/store' element={authUser ? <Store /> : <Navigate to={"/login"} />} />
 				<Route path='/store/cart' element={authUser ? <CartPage />: <Navigate to={"/login"} />} />
 				<Route path='/favorites' element={authUser ? <FavoritesPage /> : <Navigate to={"/login"} />} />
+
+				<Route path='/events' element={authUser ? <AllEvent /> : <Navigate to={"/login"} />} />
 			
 				
 			</Routes>
