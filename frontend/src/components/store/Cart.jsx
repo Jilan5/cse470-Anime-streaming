@@ -50,7 +50,7 @@ const Cart = ({ cart, onUpdateQuantity, onRemoveFromCart }) => {
             </td>
             <td>
             <input
-                className='border border-lime-400 px-2 py-2 rounded-md w-1/4 text-white'
+                className='border border-lime-400 px-2 py-2 rounded-md w-1/4 text-black'
                 type="number"
                 min="1"
                 value={item.quantity}

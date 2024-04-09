@@ -13,7 +13,7 @@ import CartPage from "./pages/cart/cartPage";
 import AnimeDetails from "./components/anime/AnimeDetails";
 import FavoritesPage from "./pages/favorites/FavoritesPage"; 
 import AllEvent from "./pages/event/EventList";
-
+import OrderInfo from "./pages/cart/OrderInfo";
 
 
 function App() {
@@ -35,6 +35,9 @@ function App() {
 				<Route path='/favorites' element={authUser ? <FavoritesPage /> : <Navigate to={"/login"} />} />
 
 				<Route path='/events' element={authUser ? <AllEvent /> : <Navigate to={"/login"} />} />
+
+				<Route path='/pages/cart/orderinfo' element={authUser ? <OrderInfo /> : <Navigate to={"/login"} />} />
+        
 			
 				
 			</Routes>
