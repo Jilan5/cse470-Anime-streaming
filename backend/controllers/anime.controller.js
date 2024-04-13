@@ -64,49 +64,56 @@ const deleteAnime = async (req, res) => {
     }
 };
 
-// Controller function to add anime to favorites
-const addToFavorites = async (req, res) => {
-  try {
-    const { animeId } = req.body;
-    const userId = req.user._id;
-
-    const anime = await Anime.findById(animeId);
-    if (!anime) {
-      return res.status(404).json({ message: 'Anime not found' });
+// Function to favorite an anime
+const favoriteAnime = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+        const anime = await Anime.findById(id);
+        if (!anime) {
+            return res.status(404).json({ message: 'Anime not found' });
+        }
+  
+        if (!anime.favorites.includes(id)) {
+            anime.favorites.push(id);
+            await anime.save();
+            return res.status(200).json({ message: 'Anime favorited successfully' });
+        } else {
+            return res.status(400).json({ message: 'Anime already favorited' });
+        }
+    } catch (error) {
+        console.error('Error favoriting anime:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
+  };
+  
+  //Function to unfavorite an anime
+  const unfavoriteAnime = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+        const anime = await Anime.findById(id);
+        if (!anime) {
+            return res.status(404).json({ message: 'Anime not found' });
+        }
+  
+        const stringId = String(id); // Convert id to string for accurate comparison
 
-    if (!anime.favorites.includes(userId)) {
-      anime.favorites.push(userId);
-      await anime.save();
-    }
-
-    res.status(200).json({ message: 'Anime added to favorites' });
+      if (anime.favorites.includes(stringId)) {
+          anime.favorites = anime.favorites.filter((favId) => String(favId) !== stringId);
+          await anime.save();
+          return res.status(200).json({ message: 'Anime unfavorited successfully' });
+      } else {
+          return res.status(400).json({ message: 'Anime is not favorited' });
+      }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+      console.error('Error unfavoriting anime:', error);
+      res.status(500).json({ message: 'Internal server error' });
   }
 };
 
-// Controller function to remove anime from favorites
-const removeFromFavorites = async (req, res) => {
-  try {
-    const { animeId } = req.body;
-    const userId = req.user._id; 
 
-    const anime = await Anime.findById(animeId);
-    if (!anime) {
-      return res.status(404).json({ message: 'Anime not found' });
-    }
 
-    anime.favorites = anime.favorites.filter((id) => id !== userId);
-    await anime.save();
-
-    res.status(200).json({ message: 'Anime removed from favorites' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
 
 export {
     getAllAnime,
@@ -114,6 +121,6 @@ export {
     createAnime,
     updateAnime,
     deleteAnime,
-    addToFavorites,
-    removeFromFavorites,
+    favoriteAnime,
+    unfavoriteAnime,
 }

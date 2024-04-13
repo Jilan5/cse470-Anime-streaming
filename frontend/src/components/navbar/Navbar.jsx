@@ -6,11 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { authUser } = useAuthContext();
-  // Function to handle adding/removing anime from favorites
- const handleFavoriteClick = () => {
-    // Implement logic to add/remove anime from favorites
-   console.log('Favorite button clicked');
-  };
+  
   return (
     <div className="navbar bg-base-100">
   <div className="flex-1">
@@ -18,11 +14,12 @@ const Navbar = () => {
   </div> 
   <div className="flex-none gap-2">
   <div>
-    <button className="btn btn-ghost text-xl font-mono"><Link to="/events">Events</Link></button>
+    <button className="btn btn-ghost text-xl font-mono"><Link to="/favorites">Favorites</Link></button>
   </div>
   <div>
-    <button className="btn btn-ghost text-xl font-mono" onClick={handleFavoriteClick}><Link to="/favorites">Favorites</Link></button>
+    <button className="btn btn-ghost text-xl font-mono"><Link to="/events">Events</Link></button>
   </div>
+  
   <div>
       <a className="btn btn-ghost text-xl font-mono"><Link to="/store">Store</Link></a>
     </div>

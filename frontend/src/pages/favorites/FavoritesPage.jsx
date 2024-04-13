@@ -1,28 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 const FavoritesPage = () => {
-  const [favorites, setFavorites] = useState([]);
+  const [favoriteAnime, setFavoriteAnime] = useState([]);
+
   useEffect(() => {
-    // Fetch user's favorite animes from backend
-    const fetchFavorites = async () => {
+    // Fetch favorite anime from the backend when the component mounts
+    const fetchFavoriteAnime = async () => {
       try {
-        const response = await axios.get('/favorites');
-        setFavorites(response.data);
+        const response = await fetch('/anime/favorites'); // Assuming this endpoint fetches the list of favorite anime
+        if (!response.ok) {
+          throw new Error('Failed to fetch favorite anime');
+        }
+        const data = await response.json();
+        setFavoriteAnime(data); // Update state with the fetched favorite anime
       } catch (error) {
-        console.error('Error fetching favorites:', error);
+        console.error('Error fetching favorite anime:', error);
+        // Handle error as needed
       }
     };
 
-    fetchFavorites();
+    fetchFavoriteAnime();
   }, []);
 
   return (
     <div>
-      <h1>Favorite Animes</h1>
+      <h1>Favorites</h1>
       <ul>
-        {favorites.map((anime) => (
-          <li key={anime._id}>{anime.name}</li>
+        {favoriteAnime.map((anime) => (
+          <li key={anime._id}>
+            <h2>{anime.name}</h2>
+            <p>{anime.description}</p>
+            {/* Add more details or actions as needed */}
+          </li>
         ))}
       </ul>
     </div>
