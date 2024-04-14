@@ -16,7 +16,12 @@ const Anime = ({ anime }) => {
       // Update local state
       setFavorited(newFavoriteStatus);
       // Update favorite status in localStorage
-      localStorage.setItem(`favorite_${anime._id}`, JSON.stringify(newFavoriteStatus));
+      const storageKey = `favorite_${anime._id}`;
+      if (newFavoriteStatus) {
+        localStorage.setItem(storageKey, JSON.stringify({ ...anime, favorited: newFavoriteStatus }));
+      } else {
+        localStorage.removeItem(storageKey);
+      }
       // Send request to backend to favorite/unfavorite anime
       const response = await fetch(`/anime/${anime._id}/${newFavoriteStatus ? 'favorite' : 'unfavorite'}`, {
         method: 'POST',
@@ -25,7 +30,7 @@ const Anime = ({ anime }) => {
         },
         body: JSON.stringify({}),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to toggle favorite state');
       }

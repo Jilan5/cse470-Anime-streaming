@@ -1,39 +1,64 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+const FavoriteAnimeCard = ({ anime, onUnfavorite }) => {
+  const handleUnfavorite = () => {
+    // Call the onUnfavorite function with the anime ID to remove it from favorites
+    onUnfavorite(anime._id);
+  };
+
+  return (
+    <div className="card card-compact w-96 shadow-x m-5 bg-slate-50">
+      <figure><img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
+      <div className="card-body">
+        <h2 className="card-title text-gray-900">{anime.name}</h2>
+        <p>{anime.description}</p>
+        <div className="card-actions justify-end">
+          <Link className="btn btn-primary" to={`/anime/${anime._id}`}>Watch</Link>
+          <button className="btn btn-secondary" onClick={handleUnfavorite}>Unfavorite</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const FavoritesPage = () => {
   const [favoriteAnime, setFavoriteAnime] = useState([]);
 
   useEffect(() => {
-    // Fetch favorite anime from the backend when the component mounts
-    const fetchFavoriteAnime = async () => {
-      try {
-        const response = await fetch('/anime/favorites'); // Assuming this endpoint fetches the list of favorite anime
-        if (!response.ok) {
-          throw new Error('Failed to fetch favorite anime');
-        }
-        const data = await response.json();
-        setFavoriteAnime(data); // Update state with the fetched favorite anime
-      } catch (error) {
-        console.error('Error fetching favorite anime:', error);
-        // Handle error as needed
-      }
-    };
-
-    fetchFavoriteAnime();
+    // Get all keys from localStorage
+    const keys = Object.keys(localStorage);
+    
+    // Filter keys to get favorite anime keys whose values are true
+    const favoriteKeys = keys.filter(key => key.startsWith('favorite_'));
+    
+    // Extract anime objects from favorite keys
+    const animeObjects = favoriteKeys.map(key => JSON.parse(localStorage.getItem(key)));
+    
+    // Set favorite anime objects in state
+    setFavoriteAnime(animeObjects);
   }, []);
+
+  const handleUnfavorite = (animeId) => {
+    // Remove the anime object from favorites
+    const updatedFavorites = favoriteAnime.filter(anime => anime._id !== animeId);
+    setFavoriteAnime(updatedFavorites);
+    // Update localStorage to remove the favorite entry
+    localStorage.removeItem(`favorite_${animeId}`);
+  };
 
   return (
     <div>
       <h1>Favorites</h1>
-      <ul>
-        {favoriteAnime.map((anime) => (
-          <li key={anime._id}>
-            <h2>{anime.name}</h2>
-            <p>{anime.description}</p>
-            {/* Add more details or actions as needed */}
-          </li>
+      <div className="flex flex-wrap">
+        {favoriteAnime.map(anime => (
+          <FavoriteAnimeCard 
+            key={anime._id} 
+            anime={anime}
+            onUnfavorite={handleUnfavorite} 
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
