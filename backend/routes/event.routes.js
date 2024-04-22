@@ -9,6 +9,10 @@ router.get('/', eventController.getAllEvent);
 
 router.get('/:id', eventController.getEventById);
 
+router.post('/:id/register', eventController.registerForEvent);
+
+router.delete('/:id/unregister', eventController.unregisterFromEvent);
+
 
 
 

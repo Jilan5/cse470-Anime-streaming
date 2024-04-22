@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema(
 			default: "",
 		},
 		// createdAt, updatedAt => Member since <createdAt>
+
+	
+		eventlist: {type:[String]},
 	},
 	{ timestamps: true }
 );

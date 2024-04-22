@@ -48,8 +48,7 @@ const FavoritesPage = () => {
   };
 
   return (
-    <div>
-      <h1>Favorites</h1>
+		<div className=" p-4 h-screen">  	  
       <div className="flex flex-wrap">
         {favoriteAnime.map(anime => (
           <FavoriteAnimeCard 
@@ -60,6 +59,7 @@ const FavoritesPage = () => {
         ))}
       </div>
     </div>
+  
   );
 };
 

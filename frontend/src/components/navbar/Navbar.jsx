@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import LogoutButton from '../sidebar/LogoutButton';
 import { useAuthContext } from '../../context/AuthContext'; 
 import { Link } from 'react-router-dom';
@@ -6,21 +6,44 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { authUser } = useAuthContext();
-  
+  const [unregisteredEventsCount, setUnregisteredEventsCount] = useState(0);
+
+  useEffect(() => {
+    // Fetch keys from local storage
+    const keys = Object.keys(localStorage);
+
+    // Count the number of unregistered events
+    let count = 0;
+    keys.forEach(key => {
+      if (key.endsWith('-registered') && localStorage.getItem(key) === 'false') {
+        count++;
+        
+      }
+    });
+
+    // Update the count state
+    setUnregisteredEventsCount(count);
+  }, []);
+
   return (
     <div className="navbar bg-base-100">
-  <div className="flex-1">
-    <a className="btn btn-ghost text-3xl font-mono text-red-500"><Link to="/">Vinland</Link></a>
-  </div> 
-  <div className="flex-none gap-2">
-  <div>
-    <button className="btn btn-ghost text-xl font-mono"><Link to="/favorites">Favorites</Link></button>
-  </div>
-  <div>
-    <button className="btn btn-ghost text-xl font-mono"><Link to="/events">Events</Link></button>
-  </div>
-  
-  <div>
+    <div className="flex-1">
+      <a className="btn btn-ghost text-3xl font-mono text-red-500"><Link to="/">Vinland</Link></a>
+    </div> 
+    <div className="flex-none gap-2">
+    <div>
+      <button className="btn btn-ghost text-xl font-mono"><Link to="/favorites">Favorites</Link></button>
+    </div>
+
+        <div>
+          <button className="btn btn-ghost text-xl font-mono"><Link to="/events">Events
+            {unregisteredEventsCount > 0 && (
+              <span className="badge bg-red-500 ml-1">{unregisteredEventsCount}</span>
+            )}
+          </Link></button>
+          
+        </div>
+        <div>
       <a className="btn btn-ghost text-xl font-mono"><Link to="/store">Store</Link></a>
     </div>
     <div>
