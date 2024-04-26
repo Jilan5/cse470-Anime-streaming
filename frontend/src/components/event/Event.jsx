@@ -18,4 +18,8 @@ const Event = ({ event }) => {
           <a className="btn btn-primary"><Link to={`/event/review/${event._id}`}>Review</Link></a>
         </div>
       </div>
-    </div>
+    
+
+};
+
+export default Event;
