@@ -13,6 +13,8 @@ router.post('/:id/register', eventController.registerForEvent);
 
 router.delete('/:id/unregister', eventController.unregisterFromEvent);
 
+router.post('/review/:id', eventController.createReview);
+router.get('/review/:id', eventController.getReviewsByEventId);
 
 
 
