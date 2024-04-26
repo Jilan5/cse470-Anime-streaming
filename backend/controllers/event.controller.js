@@ -1,6 +1,6 @@
 import Event from '../models/event.model.js';
 import User from '../models/user.model.js'; 
-
+import Review from '../models/event_review.model.js';
 
 // Function to get all event
 const getAllEvent = async (req, res) => {
@@ -64,7 +64,31 @@ const unregisterFromEvent = async (req, res) => {
     }
 };
 
+const createReview = async (req, res) => {
+    
+    const review = new Review({
+        username: req.body.username,
+        userid: req.body.userid,
+        event: req.params.id,
+        text: req.body.text
+    });
 
+    try {
+        const newReview = await review.save();
+        res.status(201).json(newReview);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
+
+const getReviewsByEventId = async (req, res) => {
+    try {
+        const reviews = await Review.find({ event: req.params.id });
+        res.json(reviews);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 
 
 export {
@@ -72,5 +96,7 @@ export {
     getEventById,
     registerForEvent,
     unregisterFromEvent,
+    createReview,
+    getReviewsByEventId
   
 }
