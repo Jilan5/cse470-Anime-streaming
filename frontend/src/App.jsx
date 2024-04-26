@@ -13,8 +13,9 @@ import CartPage from "./pages/cart/cartPage";
 import AnimeDetails from "./components/anime/AnimeDetails";
 import FavoritesPage from "./pages/favorites/FavoritesPage"; 
 import AllEvent from "./pages/event/EventList";
+import EventDetails from "./components/event/EventDetails";
 import OrderInfo from "./pages/cart/OrderInfo";
-
+import PaymentSuccess from "./pages/cart/PaymentSuccess";
 
 function App() {
 	const { authUser } = useAuthContext();
@@ -35,9 +36,9 @@ function App() {
 				<Route path='/favorites' element={authUser ? <FavoritesPage /> : <Navigate to={"/login"} />} />
 
 				<Route path='/events' element={authUser ? <AllEvent /> : <Navigate to={"/login"} />} />
-
-				<Route path='/pages/cart/orderinfo' element={authUser ? <OrderInfo /> : <Navigate to={"/login"} />} />
-        
+				<Route path='/event/review/:id' element={authUser ? <EventDetails /> : <Navigate to={"/login"} />} />
+				<Route path='/cart/orderinfo' element={authUser ? <OrderInfo /> : <Navigate to={"/login"} />} />
+				<Route path='/payment/success/:tid' element={<PaymentSuccess /> } />
 			
 				
 			</Routes>
