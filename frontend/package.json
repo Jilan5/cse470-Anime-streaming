@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "anime-streaming": "file:..",
     "axios": "^1.6.7",
     "chat-app-yt": "file:..",
     "react": "^18.2.0",

@@ -24,7 +24,8 @@ router.delete('/cart/clear', cartController.clearCart);
 
 
 // Routes for checkout
-router.post('/checkout', checkoutController.processOrder);
+router.post('/order', checkoutController.processOrder);
+router.get('/payment/success/:tid', checkoutController.paymentSuccess);
 
 
 export default router;

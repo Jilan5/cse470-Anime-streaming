@@ -82,7 +82,7 @@ function allAnime() {
     
     <div className=" px-6 m-2 py-8 bg-slate-400">
         <div className='flex justify-between border border-lime-400 px-2 py-2'>
-        <h1 className="text-3xl font-semibold text-black     ">Streaming Now</h1>
+        <h1 className="btn glass text-3xl font-semibold text-red-500     ">Streaming Now</h1>
 
         <input
         className='border border-lime-400 px-2 py-2 rounded-md w-1/4'

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
+
 
 const OrderInfo = () => {
   const location = useLocation();
   const cart = location.state?.cart; // Retrieve cart from navigation state
   const navigate = useNavigate();
+  const { authUser } = useAuthContext();
+  const userid = authUser._id;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -35,34 +39,31 @@ const OrderInfo = () => {
   // Placeholder for an actual API call to place the order
   const placeOrder = async (orderData) => {
     // Specify the backend server URL and endpoint
-    const serverUrl = 'http://localhost:3000/api/orders';
-  
+    const totalprice = calculateSubtotal().toFixed(2);
     try {
-      const response = await fetch(serverUrl, {
+      fetch('http://localhost:5000/store/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          userid: userid,
           name: orderData.name,
           phoneNumber: orderData.phoneNumber,
           address: orderData.address,
-          cartItems: cart, // Assuming 'cart' is in scope and contains your cart items
+          cartItems: cart,
+          total: totalprice // Assuming 'cart' is in scope and contains your cart items
         }),
-      });
+        
+    })
+      .then(res => res.json())
+      .then((result) => {
+          window.location.replace(result.url)
+          console.log(result);
+        });
+
   
-      if (!response.ok) {
-        // If the server responds with a bad status, throw an error
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Something went wrong');
-      }
-  
-      // You can process the response data further if needed
-      const responseData = await response.json();
-      console.log('Order placed successfully, Order ID:', responseData.orderId);
-      // Set success message or navigate to a success page
-      setMessage('Order placed successfully!');
-      // Optional: navigate('/success-page', { state: { orderId: responseData.orderId } });
+
     } catch (error) {
       setMessage(`Error placing order. Please try again. ${error.message}`);
     }
@@ -72,6 +73,8 @@ const OrderInfo = () => {
   const calculateSubtotal = () => {
     return cart?.reduce((total, item) => total + item.quantity * item.price, 0) || 0;
   };
+
+
 
   return (
     <div className='container mx-auto p-4'>

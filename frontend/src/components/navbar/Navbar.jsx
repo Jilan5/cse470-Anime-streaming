@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import LogoutButton from '../sidebar/LogoutButton';
 import { useAuthContext } from '../../context/AuthContext'; 
+import { useCart } from '../../context/cartContext';
 import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
   const { authUser } = useAuthContext();
+  const [cart, setCart] = useCart();
   const [unregisteredEventsCount, setUnregisteredEventsCount] = useState(0);
 
   useEffect(() => {
@@ -47,7 +49,10 @@ const Navbar = () => {
       <a className="btn btn-ghost text-xl font-mono"><Link to="/store">Store</Link></a>
     </div>
     <div>
-      <a className="btn btn-ghost text-xl font-mono"><Link to="/store/cart">Cart</Link></a>
+      <a className=" "><Link to="/store/cart"><button className="btn text-xl font-mono">
+  Cart
+  <div className="badge  badge-secondary">{cart.length}</div>
+</button></Link></a>
     </div>
     <div className="form-control">
       <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />

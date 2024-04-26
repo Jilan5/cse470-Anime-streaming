@@ -25,7 +25,7 @@ const CartPage = () => {
   };
 
   const handleConfirm = () => {
-    navigate('/pages/cart/orderinfo', { state: { cart } });
+    navigate('/cart/orderinfo', { state: { cart } });
   };
 
   const calculateSubtotal = () => {

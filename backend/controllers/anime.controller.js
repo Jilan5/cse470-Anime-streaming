@@ -1,4 +1,5 @@
 import Anime from '../models/anime.model.js';
+import Comment from '../models/anime_comment.model.js';
 
 // Function to get all anime
 const getAllAnime = async (req, res) => {
@@ -114,6 +115,31 @@ const favoriteAnime = async (req, res) => {
 
 
 
+const createComment = async (req, res) => {
+    
+    const comment = new Comment({
+        username: req.body.username,
+        userid: req.body.userid,
+        anime: req.params.id,
+        text: req.body.text
+    });
+
+    try {
+        const newComment = await comment.save();
+        res.status(201).json(newComment);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
+
+const getCommentsByAnimeId = async (req, res) => {
+    try {
+        const comments = await Comment.find({ anime: req.params.id });
+        res.json(comments);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 
 export {
     getAllAnime,
@@ -123,4 +149,6 @@ export {
     deleteAnime,
     favoriteAnime,
     unfavoriteAnime,
+    createComment,
+    getCommentsByAnimeId
 }
