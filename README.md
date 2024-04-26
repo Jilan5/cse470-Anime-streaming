@@ -23,33 +23,39 @@ Some backend and frontend features include:
 - Real-time messaging with Socket.io
 - Online user status (Socket.io and React Context)
 
-### Registration Page
+### Few Visuals of the Website
+
+### Anime Home Page
+
+### Anime Login and Registration page
 
 
-## Installation
 
--  Clone this repository
-- Run the  following commands:
 
-```bash
-  npm run build
-  npm run start
-```
-- Set up your own .env file with the following:
-```bash
-   PORT=...
-   MONGO_DB_URI=...
-   JWT_SECRET=...
-   NODE_ENV=...
+### Setup .env file
+
+```js
+PORT=...
+MONGO_DB_URI=...
+JWT_SECRET=...
+NODE_ENV=...
 ```
 
-    
-## How To Tweak This Project For Your Own Use
+### Build the app
 
-This is an example project so it is highly suggested that you at first clone and then rename the project for your own personal use. Feel free to add more exciting features to it!
-## Feedback
+```shell
+npm run build
+```
 
-If you have any feedback for improvement or found any bug in the project, please submit an issue using the issues tab above.
+### Start the backend server app
 
-
-
+```shell
+cd backend
+npm start
+```
+### Start the frontend server app
+- Open a new terminal first
+```shell
+cd frontend
+npm run dev
+```
