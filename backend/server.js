@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
+import profileRoutes from "./routes/profile.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import storeRoutes from "./routes/store.routes.js";
@@ -28,6 +29,7 @@ app.use("/anime", animeRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
+app.use("/profile", profileRoutes);
 app.use("/store", storeRoutes);
 app.use("/genre", anime_genreRoutes);
 

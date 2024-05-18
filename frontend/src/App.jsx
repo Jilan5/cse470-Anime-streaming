@@ -16,6 +16,7 @@ import AllEvent from "./pages/event/EventList";
 import EventDetails from "./components/event/EventDetails";
 import OrderInfo from "./pages/cart/OrderInfo";
 import PaymentSuccess from "./pages/cart/PaymentSuccess";
+import Profile from "./components/profile/Profile";
 
 function App() {
 	const { authUser } = useAuthContext();
@@ -39,6 +40,7 @@ function App() {
 				<Route path='/event/review/:id' element={authUser ? <EventDetails /> : <Navigate to={"/login"} />} />
 				<Route path='/cart/orderinfo' element={authUser ? <OrderInfo /> : <Navigate to={"/login"} />} />
 				<Route path='/payment/success/:tid' element={<PaymentSuccess /> } />
+				<Route path='/profile' element={authUser ? <Profile /> : <Navigate to={"/login"} />} />
 			
 				
 			</Routes>
